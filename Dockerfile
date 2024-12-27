@@ -9,7 +9,7 @@ WORKDIR /test
 COPY --from=build /app/target/*.war /test
 CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
 EXPOSE 8080
-CMD ["sleep", "infinity"] #to make the container not to be in exited state
+#CMD ["sleep", "infinity"] #to make the container not to be in exited state
 
 
 
