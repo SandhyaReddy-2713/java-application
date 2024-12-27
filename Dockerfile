@@ -17,14 +17,14 @@
 
 # # For normally accessing java-application
 
-FROM ubuntu
-RUN  apt-get update && apt-get install openjdk-17-jdk maven -y
-WORKDIR /test
-COPY . /test
-RUN mvn clean install
-EXPOSE 8080 
-RUN ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
-CMD ["sleep", "infinity"]
+# FROM ubuntu
+# RUN  apt-get update && apt-get install openjdk-17-jdk maven -y
+# WORKDIR /test
+# COPY . /test
+# RUN mvn clean install
+# EXPOSE 8080 
+# RUN ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+# CMD ["sleep", "infinity"]
 
 
 # dockerfile using sh 
