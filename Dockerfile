@@ -24,7 +24,7 @@ COPY . /test
 RUN mvn clean install
 EXPOSE 8080 
 CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
-CMD ["sleep", "infinity"]
+#CMD ["sleep", "infinity"]
 
 
 # dockerfile using sh 
