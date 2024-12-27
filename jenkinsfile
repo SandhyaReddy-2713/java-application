@@ -1,0 +1,75 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good',
+    'FAILURE': 'danger'
+    ]
+pipeline {
+    agent any
+     environment {
+        SCANNER_HOME = tool 'sonarqube'
+    }
+    stages {
+        stage('git checkout') {
+            steps {
+             git branch:'main' 'https://github.com/SandhyaReddy-2713/gitlab.git'
+            }
+        }
+         stage('compile') {
+            steps {
+              sh 'mvn compile'
+            }
+        }
+         stage('code analysis') {
+            steps {
+              withSonarQubeEnv('sonar-server') {
+               sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=java-application \
+               -Dsonar.java.binaries=. \
+               -Dsonar.projectKey=java-application'''
+              }
+            }
+        }
+        
+         stage('docker build') {
+            steps {
+              sh 'docker build -t java-image .'
+            }
+        }
+        stage('Run Docker Container') {
+          steps {
+            sh 'docker run -itd --name java--image -p 8085:8081 java-image'
+          }
+      } 
+ }	
+ 
+    post {
+        always {
+            echo 'slack Notification.'
+            slackSend channel: '#java-channel',
+            color: COLOR_MAP [currentBuild.currentResult],
+            message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URl}"
+            
+        }
+    }
+     post {
+        // Always send an email after the pipeline runs
+        always {
+            script {
+                emailext(
+                    subject: "Jenkins Build Notification - ${currentBuild.fullDisplayName}",
+                    body: """
+                        <h2>Build Notification</h2>
+                        <p>Project: ${JOB_NAME}</p>
+                        <p>Build Number: ${BUILD_NUMBER}</p>
+                        <p>Status: ${currentBuild.currentResult}</p>
+                        <p>View build: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
+                    """,
+                    to: 'pulakuntasandhyareddy@gmail.com',
+                    from: 'jenkins@gmail.com',
+                    replyTo: 'jenkins@gmail.com',
+                    mimeType: 'text/html' // Comma added before this line
+                )
+            }
+        }
+    } 
+
+}
+
