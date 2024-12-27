@@ -20,7 +20,7 @@
 FROM ubuntu
 RUN  apt-get update && apt-get install openjdk-17-jdk maven -y
 WORKDIR /test
-COPY /test/target/*.war /test
+COPY target/*.war /test
 RUN mvn clean install
 EXPOSE 8080 
 CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
