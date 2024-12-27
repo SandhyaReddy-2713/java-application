@@ -39,18 +39,22 @@
 
 
 
-# Use a base image with Java runtime
-FROM openjdk:17-jdk-slim
+# Use a Java base image
+FROM ubuntu
+RUN apt update && apt install openjdk-17-jdk maven -y
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the application JAR file into the container
-COPY target/app-0.0.1-SNAPSHOT.war /app
+# Copy the source code into the container
+COPY . .
 
-# Expose the application port (update this to match your app)
+# Command to build the application
+RUN mvn clean install
+
+# Expose the application port (update to match your app's port)
 EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+# Command to run the application
+CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
 
