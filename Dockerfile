@@ -1,14 +1,14 @@
 #multi-stage to access java-application
-FROM maven AS build
-WORKDIR /app
-COPY . /app
-RUN mvn clean install
+# FROM maven AS build
+# WORKDIR /app
+# COPY . /app
+# RUN mvn clean install
 
-FROM openjdk:17-alpine
-WORKDIR /test
-COPY --from=build /app/target/*.war /test
-CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
-EXPOSE 8080
+# FROM openjdk:17-alpine
+# WORKDIR /test
+# COPY --from=build /app/target/*.war /test
+# CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+# EXPOSE 8080
 #CMD ["sleep", "infinity"] #to make the container not to be in exited state
 
 
@@ -39,11 +39,18 @@ EXPOSE 8080
 
 
 
+# Use a base image with Java runtime
+FROM openjdk:17-jdk-slim
 
-# FROM ubuntu
-# RUN apt-get update && apt-get install -y openjdk-17-jdk maven
-# WORKDIR /test
-# COPY . /test
-# RUN mvn clean install
-# EXPOSE 8080
-# CMD ["java", "-jar", "/test/target/app-0.0.1-SNAPSHOT.war"]
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application JAR file into the container
+COPY target/app-0.0.1-SNAPSHOT.war /app
+
+# Expose the application port (update this to match your app)
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+
