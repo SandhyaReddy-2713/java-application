@@ -27,19 +27,18 @@ pipeline {
               }
             }
         }
-        
-         stage('docker build') {
-            steps {
-              sh 'docker build -t java-image .'
-            }
-        }
-         stage('containers') {
+        stage('containers') {
             steps {
                 sh 'docker stop $(docker ps -q) || true'
                 sh 'docker rm $(docker ps -aq) || true'
                 sh 'docker rmi $(docker images -q) || true'
             }
          }
+         stage('docker build') {
+            steps {
+              sh 'docker build -t java-image .'
+            }
+        }
         stage('Run Docker Container') {
           steps {
             sh 'docker run -itd --name java-image -p 8085:8081 java-image'
