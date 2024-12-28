@@ -31,30 +31,12 @@
 # FROM ubuntu
 # RUN apt update && apt install openjdk-17-jdk maven git  -y
 # WORKDIR /test
-# RUN https://github.com/SandhyaReddy-2713/java-application.git /test
+# RUN git clone https://github.com/SandhyaReddy-2713/java-application.git /test
 # RUN mvn clean install
-# ENTRYPOINT ["/test/build.sh"]
+# ENTRYPOINT ["build.sh"]
 # EXPOSE 8080
 
 
 
 
-# Use a Java base image
-FROM ubuntu
-RUN apt update && apt install openjdk-17-jdk maven -y
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the source code into the container
-COPY . .
-
-# Command to build the application
-RUN mvn clean install
-
-# Expose the application port (update to match your app's port)
-EXPOSE 8080
-
-# Command to run the application
-CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
 
