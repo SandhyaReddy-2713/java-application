@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('git checkout') {
             steps {
-             git branch:'main' 'https://github.com/SandhyaReddy-2713/gitlab.git'
+             git branch:'main' 'https://github.com/SandhyaReddy-2713/java-applicatio.git'
             }
         }
          stage('compile') {
