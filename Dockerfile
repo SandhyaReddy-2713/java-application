@@ -20,10 +20,10 @@
 # FROM ubuntu
 # RUN  apt-get update && apt-get install openjdk-17-jdk maven -y
 # WORKDIR /test
-# COPY . /test
+# RUN git clone https://github.com/SandhyaReddy-2713/java-application.git /test
 # RUN mvn clean install
 # EXPOSE 8080 
-# RUN ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+# CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
 # CMD ["sleep", "infinity"]
 
 
