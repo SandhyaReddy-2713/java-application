@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . /app
 RUN mvn clean install
 
-FROM amazonlinux
+FROM openjdk 17.0.13
 WORKDIR /test
 COPY --from=build /app/target/*.war /test
 CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
