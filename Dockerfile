@@ -7,7 +7,7 @@ RUN mvn clean install
 FROM openjdk:17-alpine
 WORKDIR /test
 COPY --from=build /app/target/*.war /test
-CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war" --server.port=8081]
 #ENTRYPOINT ["java", "-jar", "app-0.0.1-SNAPSHOT.war" --server.port=8081]
 EXPOSE 8081 
 #CMD ["sleep", "infinity"] #to make the container not to be in exited state
