@@ -45,19 +45,13 @@ pipeline {
         }
      } 
    }	
- 
     post {
         always {
-            echo 'slack Notification.'
+            echo 'Slack Notification.'
             slackSend channel: '#java-channel',
-            color: COLOR_MAP [currentBuild.currentResult],
-            message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URl}"
-            
-        }
-    }
-    post {
-        // Always send an email after the pipeline runs
-        always {
+                      color: COLOR_MAP[currentBuild.currentResult],
+                      message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+
             script {
                 emailext(
                     subject: "Jenkins Build Notification - ${currentBuild.fullDisplayName}",
@@ -71,7 +65,7 @@ pipeline {
                     to: 'pulakuntasandhyareddy@gmail.com',
                     from: 'jenkins@gmail.com',
                     replyTo: 'jenkins@gmail.com',
-                    mimeType: 'text/html' // Comma added before this line
+                    mimeType: 'text/html'
                 )
             }
         }
