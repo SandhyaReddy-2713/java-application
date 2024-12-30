@@ -44,7 +44,7 @@
 
 
 # dockerfile for manual proces:
-FROM openjdk:17-jdk-alpine
+FROM amazonlinux
 WORKDIR /test
 COPY /target/app-0.0.1-SNAPSHOT.war /test
 CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
