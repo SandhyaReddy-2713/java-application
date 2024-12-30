@@ -3,7 +3,7 @@ def COLOR_MAP = [
     'FAILURE': 'danger'
     ]
 pipeline {
-    agent any
+    agent {label 'slave1'}
      environment {
         SCANNER_HOME = tool 'sonarqube'
     }
