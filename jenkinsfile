@@ -27,7 +27,7 @@ pipeline {
               }
             }
         }
-        stage('containers') {
+        stage('Clean UP') {
             steps {
                 sh 'docker stop $(docker ps -q) || true'
                 sh 'docker rm $(docker ps -aq) || true'
