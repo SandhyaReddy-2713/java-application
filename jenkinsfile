@@ -42,7 +42,7 @@ pipeline {
          stage('docker push') {
             steps {
              script {
-                withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                withDockerRegistry(credentialsId: 'dockerhub_cred', toolName: 'docker') {
                     sh 'docker tag java-image sandhyareddy2713/java-image'
                     sh 'docker push sandhyareddy2713/java-image'
                   }
