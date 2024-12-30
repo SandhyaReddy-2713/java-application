@@ -47,6 +47,6 @@
 FROM openjdk:17-jdk-alpine
 WORKDIR /test
 COPY /target/app-0.0.1-SNAPSHOT.war /test
-ENTRYPOINT ["java", "-jar" "app-0.0.1-SNAPSHOT.war"]
-CMD ["sleep", "infinity]
+CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+#CMD ["sleep", "infinity]
 EXPOSE 8080
