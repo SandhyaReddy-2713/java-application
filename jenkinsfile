@@ -39,6 +39,16 @@ pipeline {
               sh 'docker build -t java-image .'
             }
         }
+         stage('docker push') {
+            steps {
+             script {
+                withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                    sh 'docker tag java-image sandhyareddy2713/java-image'
+                    sh 'docker push sandhyareddy2713/java-image'
+                  }
+              }
+            }
+         }    
         stage('Run Docker Container') {
           steps {
             sh 'docker run -itd --name java-image -p 8085:8080 java-image'
