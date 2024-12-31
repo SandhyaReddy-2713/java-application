@@ -43,7 +43,7 @@ pipeline {
             steps {
              script {
                 withDockerRegistry(credentialsId: 'dockerhub_cred', toolName: 'docker') {
-                    #sh 'docker tag java-image sandhyareddy2713/java-image'
+                    #sh 'docker tag java-images sandhyareddy2713/java-images'
                     sh 'docker push sandhyareddy2713/java-images'
                   }
               }
@@ -51,7 +51,7 @@ pipeline {
          }    
         stage('Run Docker Container') {
           steps {
-            sh 'docker run -itd --name java-image -p 8085:8080 java-images'
+            sh 'docker run -itd --name java-image -p 8008:8080 java-images'
         }
      } 
    }	
