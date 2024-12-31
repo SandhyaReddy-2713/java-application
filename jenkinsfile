@@ -36,14 +36,14 @@ pipeline {
          }
          stage('docker build') {
             steps {
-              sh 'docker build -t sandhyareddy2713/java-images .'
+              sh 'docker build -t sandhyareddy2713/java-img .'
             }
         }
          stage('docker push') {
             steps {
              script {
                 withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker') {
-                    sh 'docker tag java-images sandhyareddy2713/java-images'
+                    sh 'docker tag java-img sandhyareddy2713/java-images'
                     sh 'docker push sandhyareddy2713/java-images'
                   }
               }
@@ -51,7 +51,7 @@ pipeline {
          }    
         stage('Run Docker Container') {
           steps {
-            sh 'docker run -itd --name java-image -p 8008:8080 java-images'
+            sh 'docker run -itd --name java-image -p 8008:8080 java-img'
         }
      } 
    }	
