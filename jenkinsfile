@@ -43,8 +43,8 @@ pipeline {
             steps {
              script {
                 withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker') {
-                    sh 'docker tag java-img sandhyareddy2713/java-images'
-                    sh 'docker push sandhyareddy2713/java-images'
+                    #sh 'docker tag java-img sandhyareddy2713/java-images'
+                    sh 'docker push sandhyareddy2713/java-img'
                   }
               }
             }
