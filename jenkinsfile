@@ -42,7 +42,7 @@ pipeline {
          stage('docker push') {
             steps {
              script {
-                withDockerRegistry(credentialsId: 'docker_cred', toolName: 'docker') {
+                withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {
                     sh 'docker push sandhyareddy2713/java-image'
                   }
               }
