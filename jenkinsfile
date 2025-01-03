@@ -8,6 +8,11 @@ pipeline {
         SCANNER_HOME = tool 'sonarqube'
     }
     stages {
+        stage('clean workspace') {
+            steps {
+                cleanWs ()
+            }
+        }
         stage('git checkout') {
             steps {
              git branch: 'main', url: 'https://github.com/SandhyaReddy-2713/java-application.git'
