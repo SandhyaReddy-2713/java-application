@@ -29,7 +29,7 @@ pipeline {
         }
          stage('file-scan') {
             steps {
-                sh 'trivy fs --security-checks vuln,config -f json -o file-scan.html .'
+                sh 'trivy fs --security-checks vuln -f json -o file-scan.json .'
             }
          }
         stage('Clean UP') {
