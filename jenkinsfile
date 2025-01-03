@@ -27,6 +27,11 @@ pipeline {
               }
             }
         }
+         stage('file-scan') {
+            steps {
+                sh 'trivy fs --security-checks vuln,config -f json -o file-scan.html .'
+            }
+         }
         stage('Clean UP') {
             steps {
                 sh 'docker stop $(docker ps -q) || true'
