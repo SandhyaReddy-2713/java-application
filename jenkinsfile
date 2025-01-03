@@ -39,6 +39,11 @@ pipeline {
               sh 'docker build -t sandhyareddy2713/java-image .'
             }
         }
+         stage('trivy') {
+            steps {
+                sh 'trivy --severity LOW,MEDIUM -f table -o image-scan.html sandhyareddy2713/java-image'
+            }
+         }
          stage('docker push') {
             steps {
              script {
