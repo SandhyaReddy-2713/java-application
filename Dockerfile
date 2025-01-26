@@ -9,3 +9,15 @@
 # COPY --from=build /app/target/*.war /test
 # CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
 # EXPOSE 8080
+
+
+#to access application on tomcat
+FROM maven as build
+WORKDIR /app
+COPY . /app
+RUN mvn clean install -DskipTests
+
+FROM tomcat
+COPY --from=build /app/target/bankapp-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
+EXPOSE 8080
+RUN ["catalina.sh", "run"]
