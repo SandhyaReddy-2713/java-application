@@ -19,5 +19,5 @@ RUN mvn clean install -DskipTests
 
 FROM tomcat
 COPY --from=build /app/target/bankapp-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
-EXPOSE 8080
+EXPOSE 8085
 RUN ["catalina.sh", "run"]
