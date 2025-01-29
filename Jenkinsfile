@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ("git scm") {
             steps {
-                git branch: 'master', url: 'https://github.com/SandhyaReddy-2713/java-application.git'
+                git branch: 'main', url: 'https://github.com/SandhyaReddy-2713/java-application.git'
             }
         }
         stage ("compile") {
