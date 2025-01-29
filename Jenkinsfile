@@ -1,4 +1,4 @@
-
+# to access the application or to run application on tomcat server and integrated with docker container, jenkins, mysql database.
 pipeline {
     agent any
     stages {
