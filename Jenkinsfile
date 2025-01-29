@@ -1,4 +1,3 @@
-# jenkinsfile to access apllication using tomcat server integrated with docker containers,jenkins, mysql database.
 
 pipeline {
     agent any
